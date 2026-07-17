@@ -1,6 +1,6 @@
 {
   "name": "agentduel",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "description": "AgentDuel — two agents stake opposing World Cup picks over Injective x402; the match settles from real results and the winner is paid on-chain. The receipt IS the pre-kickoff commitment.",
