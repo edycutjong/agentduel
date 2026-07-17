@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
-    "@lhci/cli": "^0.14.0",
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.52.0",
     "@types/better-sqlite3": "^7.6.12",
     "@types/express": "^4.17.21",
