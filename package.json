@@ -1,0 +1,67 @@
+{
+  "name": "agentduel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AgentDuel — two agents stake opposing World Cup picks over Injective x402; the match settles from real results and the winner is paid on-chain. The receipt IS the pre-kickoff commitment.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edycutjong/agentduel.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "api": "tsx api/server.ts",
+    "start": "tsx api/server.ts",
+    "settle": "tsx scripts/settle.ts",
+    "replay": "tsx scripts/replay.ts",
+    "bench": "tsx scripts/bench.ts",
+    "readiness": "tsx scripts/check_submission_readiness.ts",
+    "spawn-duelists": "tsx scripts/spawn-duelists.ts",
+    "entry-smoke": "tsx scripts/entry-smoke.ts",
+    "payout-smoke": "tsx scripts/payout-smoke.ts",
+    "red": "tsx duelists/red.ts",
+    "cyan": "tsx duelists/cyan.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "ci": "npm run typecheck && npm test",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "lighthouse": "lhci autorun",
+    "web:dev": "npm --prefix web run dev",
+    "web:build": "npm --prefix web run build",
+    "web:start": "npm --prefix web run start"
+  },
+  "dependencies": {
+    "@injectivelabs/x402": "^0.0.1",
+    "better-sqlite3": "^11.8.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-cron": "^4.6.0",
+    "viem": "^2.21.54",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@lhci/cli": "^0.14.0",
+    "@playwright/test": "^1.52.0",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.18.0",
+    "globals": "^15.14.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "tmp": "^0.2.6",
+    "cookie": "^0.7.2",
+    "uuid": "^11.1.1"
+  }
+}

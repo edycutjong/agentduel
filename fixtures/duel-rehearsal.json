@@ -1,0 +1,33 @@
+{
+  "_note": "A REHEARSAL duel so the arena page never demos empty. The fixture (QF FRA vs MAR, match 537383, France 2-0, REGULAR) is a REAL finished football-data.org result. The two entry receipts are OBVIOUSLY-FAKE, labeled all-zero placeholder tx hashes (is_placeholder:true) — NEVER presented as on-chain receipts. The seeder settles this duel through the SAME code path as a real duel but with the mock payWinner, so the payout tx is a labeled mock-tx-… (is_mock:true), not a real transfer. This is the honest 'dev exhibit', clearly marked in the UI.",
+  "duel": {
+    "id": "duel-rehearsal-fra-mar",
+    "match_id": 537383,
+    "fixture": "QF: FRA vs MAR",
+    "competition": "FIFA World Cup 2026",
+    "stage": "QUARTER_FINALS",
+    "kickoff_utc": "2026-07-09T20:00:00Z",
+    "home_label": "France to advance",
+    "away_label": "Morocco to advance"
+  },
+  "slots": [
+    {
+      "agent": "RED",
+      "side": "HOME",
+      "side_label": "France to advance",
+      "rationale": "Bought LineLock's paid pick: model 58% vs market-implied 49% on France, +9 prob-point edge. France's midfield control and rest advantage make HOME the value side; staking the edge.",
+      "wallet": "0x0000000000000000000000000000000000000000",
+      "receipt_tx": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "receipt_block_time": "2026-07-09T19:22:41Z"
+    },
+    {
+      "agent": "CYAN",
+      "side": "AWAY",
+      "side_label": "Morocco to advance",
+      "rationale": "Free consensus odds only, contrarian by mandate: RED took France so I take the other side. Morocco's knockout defensive record and set-piece threat give live upset equity at these prices.",
+      "wallet": "0x0000000000000000000000000000000000000000",
+      "receipt_tx": "0x0000000000000000000000000000000000000000000000000000000000000001",
+      "receipt_block_time": "2026-07-09T19:31:08Z"
+    }
+  ]
+}

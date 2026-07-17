@@ -1,0 +1,25 @@
+{
+  "_note": "RECORDED LineLock POST /api/edge 200 response (shape mirrors ../../hackquest-injective-linelock/build/api/routes.ts edgeHandler). LineLock is built in the sibling folder but NOT deployed, so RED reads this fixture instead of a live paid call, and degrades to free consensus odds if LINELOCK_URL is unreachable. receipt is null on purpose — no real paid call was made offline; a live call would attach the x402 tx here.",
+  "fixture": "SF: FRA vs ESP",
+  "competition": "FIFA World Cup 2026",
+  "stage": "SF",
+  "kickoff_utc": "2026-07-14T19:00:00Z",
+  "side": "HOME",
+  "side_label": "France to advance",
+  "model_prob": 0.58,
+  "market_odds": 2.05,
+  "market_implied_prob": 0.4878,
+  "edge_pct": 0.0922,
+  "ev_pct": 0.189,
+  "recommended_tier": 2,
+  "ladder": [
+    { "tier": 0, "name": "pass", "stake_units": 0, "stake_pct": 0, "rationale": "no edge" },
+    { "tier": 1, "name": "probe", "stake_units": 1, "stake_pct": 1, "rationale": "thin edge, small probe" },
+    { "tier": 2, "name": "value", "stake_units": 2, "stake_pct": 2, "rationale": "+9.2 prob-point edge, +18.9% EV — a value play on France's midfield control" },
+    { "tier": 3, "name": "banker", "stake_units": 3, "stake_pct": 3, "rationale": "reserved for >15 prob-point edges" }
+  ],
+  "issued_at": "2026-07-12T12:00:00Z",
+  "pick_hash": "e3c1a9f0a1b2c3d4e5f60718293a4b5c6d7e8f90112233445566778899aabbcc",
+  "receipt": null,
+  "note": "Recorded/unsettled response (no on-chain receipt bound). A live paid call would attach the x402 receipt tx as the pre-kickoff timestamp."
+}

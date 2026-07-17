@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="AgentDuel — two energy blades, red and cyan, clash in a burst of light above a gold coin-ball">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14121e"/><stop offset="0.5" stop-color="#0B0A10"/><stop offset="1" stop-color="#170a0c"/>
+    </linearGradient>
+    <radialGradient id="vign" cx="0.5" cy="0.4" r="0.78">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.5"/>
+    </radialGradient>
+    <linearGradient id="red" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#8f0f24"/><stop offset="0.5" stop-color="#FF3D5A"/><stop offset="1" stop-color="#FF9CAE"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="1" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#0a6478"/><stop offset="0.5" stop-color="#22D3EE"/><stop offset="1" stop-color="#B4F3FB"/>
+    </linearGradient>
+    <radialGradient id="coin" cx="0.4" cy="0.32" r="0.85">
+      <stop offset="0" stop-color="#FFEDB0"/><stop offset="0.45" stop-color="#FFC12E"/><stop offset="0.85" stop-color="#C8860C"/><stop offset="1" stop-color="#6f4b00"/>
+    </radialGradient>
+    <radialGradient id="spark" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="0.32" stop-color="#FFEDB0"/><stop offset="0.65" stop-color="#FFB300" stop-opacity="0.45"/><stop offset="1" stop-color="#FFB300" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF3D5A"/><stop offset="0.5" stop-color="#FFB300"/><stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="20"/></filter>
+    <clipPath id="badge"><rect x="24" y="24" width="464" height="464" rx="116"/></clipPath>
+  </defs>
+
+  <rect x="24" y="24" width="464" height="464" rx="116" fill="url(#bg)"/>
+  <g clip-path="url(#badge)">
+    <!-- arena floor glow -->
+    <ellipse cx="256" cy="330" rx="230" ry="150" fill="#FFB300" opacity="0.12" filter="url(#soft)"/>
+    <!-- concentric arena rings -->
+    <g fill="none" stroke="url(#ring)">
+      <circle cx="256" cy="322" r="150" stroke-width="2.4" opacity="0.18"/>
+      <circle cx="256" cy="322" r="196" stroke-width="1.6" opacity="0.10"/>
+    </g>
+    <!-- faint clash streaks -->
+    <g stroke-linecap="round">
+      <line x1="72" y1="150" x2="196" y2="238" stroke="#FF3D5A" stroke-width="3" opacity="0.30"/>
+      <line x1="440" y1="150" x2="316" y2="238" stroke="#22D3EE" stroke-width="3" opacity="0.30"/>
+    </g>
+    <!-- sparks -->
+    <g fill="#fff3dd">
+      <circle cx="122" cy="112" r="3" opacity="0.85"/><circle cx="392" cy="122" r="2.4" opacity="0.6"/>
+      <circle cx="360" cy="82" r="1.8" opacity="0.5"/><circle cx="150" cy="196" r="1.8" opacity="0.4"/>
+      <circle cx="406" cy="320" r="2.2" opacity="0.5"/><circle cx="104" cy="340" r="2.2" opacity="0.5"/>
+    </g>
+
+    <!-- gold coin-ball (the purse / football) -->
+    <g filter="url(#glow)">
+      <circle cx="256" cy="322" r="94" fill="url(#coin)" stroke="#5b3f00" stroke-width="4"/>
+      <path d="M256 272 L304 307 L286 363 L226 363 L208 307 Z" fill="#3f2c00" opacity="0.5"/>
+      <path d="M256 272 L304 307 L286 363 L226 363 L208 307 Z" fill="none" stroke="#7a5200" stroke-width="5" stroke-linejoin="round"/>
+      <g stroke="#7a5200" stroke-width="4" opacity="0.55" stroke-linecap="round">
+        <line x1="256" y1="272" x2="256" y2="238"/><line x1="304" y1="307" x2="336" y2="294"/>
+        <line x1="286" y1="363" x2="298" y2="396"/><line x1="226" y1="363" x2="214" y2="396"/><line x1="208" y1="307" x2="176" y2="294"/>
+      </g>
+      <circle cx="256" cy="322" r="94" fill="none" stroke="#FFEDB0" stroke-width="3" opacity="0.55"/>
+      <ellipse cx="226" cy="292" rx="34" ry="22" fill="#fff" opacity="0.16"/>
+    </g>
+
+    <!-- energy blades: red bottom-left, cyan bottom-right, clashing high -->
+    <g stroke-linecap="round" filter="url(#glow)">
+      <path d="M126 404 L302 168" stroke="#FF3D5A" stroke-width="44" opacity="0.22"/>
+      <path d="M386 404 L210 168" stroke="#22D3EE" stroke-width="44" opacity="0.22"/>
+      <path d="M126 404 L302 168" stroke="url(#red)" stroke-width="28"/>
+      <path d="M386 404 L210 168" stroke="url(#cyan)" stroke-width="28"/>
+      <path d="M132 398 L296 174" stroke="#ffffff" stroke-width="6.5" opacity="0.85"/>
+      <path d="M380 398 L216 174" stroke="#ffffff" stroke-width="6.5" opacity="0.85"/>
+    </g>
+    <!-- hilts + pommels -->
+    <g stroke-linecap="round">
+      <path d="M108 382 L162 426" stroke="#FF3D5A" stroke-width="18"/>
+      <path d="M404 382 L350 426" stroke="#22D3EE" stroke-width="18"/>
+      <circle cx="126" cy="404" r="11" fill="#FF9CAE"/><circle cx="386" cy="404" r="11" fill="#B4F3FB"/>
+    </g>
+
+    <!-- clash burst at the crossing (~256,206) -->
+    <circle cx="256" cy="206" r="96" fill="url(#spark)"/>
+    <g filter="url(#glow)">
+      <path d="M256 138 L271 190 L323 206 L271 222 L256 274 L241 222 L189 206 L241 190 Z" fill="#FFEDB0"/>
+      <path d="M256 166 L264 198 L296 206 L264 214 L256 246 L248 214 L216 206 L248 198 Z" fill="#ffffff"/>
+      <circle cx="256" cy="206" r="13" fill="#ffffff"/>
+    </g>
+  </g>
+  <rect x="24" y="24" width="464" height="464" rx="116" fill="url(#vign)" clip-path="url(#badge)"/>
+  <rect x="25.5" y="25.5" width="461" height="461" rx="115" fill="none" stroke="#FFB300" stroke-width="1.5" opacity="0.28"/>
+</svg>

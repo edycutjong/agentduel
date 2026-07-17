@@ -1,0 +1,25 @@
+{
+  "_note": "Open, enterable seed duels for the arena. match_id / kickoff_utc are REAL football-data.org values (WC-2026, comp 2000). These are OPEN — no slots, no fake receipts. Real entries are funds-gated (the x402 stake needs a funded duelist wallet); until then the arena page shows them as awaiting duelists.",
+  "duels": [
+    {
+      "id": "duel-sf-fra-esp",
+      "match_id": 537387,
+      "fixture": "SF: FRA vs ESP",
+      "competition": "FIFA World Cup 2026",
+      "stage": "SEMI_FINALS",
+      "kickoff_utc": "2026-07-14T19:00:00Z",
+      "home_label": "France to advance",
+      "away_label": "Spain to advance"
+    },
+    {
+      "id": "duel-final-2026",
+      "match_id": 537390,
+      "fixture": "F: Finalist A vs Finalist B",
+      "competition": "FIFA World Cup 2026",
+      "stage": "FINAL",
+      "kickoff_utc": "2026-07-19T19:00:00Z",
+      "home_label": "Home finalist to lift the cup",
+      "away_label": "Away finalist to lift the cup"
+    }
+  ]
+}

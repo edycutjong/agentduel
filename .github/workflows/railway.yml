@@ -1,0 +1,32 @@
+name: Deploy API to Railway
+
+# Deploys the Express x402 API (Dockerfile) to Railway.
+# Required repo secret:   RAILWAY_TOKEN   (a Railway *project* token)
+# Required repo variable:  RAILWAY_SERVICE (the Railway service name, e.g. "agentduel-api")
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "web/**"
+      - "**/*.md"
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Skip cleanly on forks / when the token isn't configured.
+    if: ${{ github.repository_owner == 'edycutjong' }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 20
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy
+        run: railway up --service "${{ vars.RAILWAY_SERVICE }}" --ci
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

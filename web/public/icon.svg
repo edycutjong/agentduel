@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="AgentDuel — two energy blades, red and cyan, clash over a gold coin-ball with a spark">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="var(--bg-base, #0B0A10)"/>
+      <stop offset="0.55" stop-color="#141008"/>
+      <stop offset="1" stop-color="#120609"/>
+    </linearGradient>
+    <linearGradient id="bladeRed" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#B3122E"/>
+      <stop offset="1" stop-color="var(--duel-red, #FF3D5A)"/>
+    </linearGradient>
+    <linearGradient id="bladeCyan" x1="1" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#0E7F96"/>
+      <stop offset="1" stop-color="var(--duel-cyan, #22D3EE)"/>
+    </linearGradient>
+    <radialGradient id="coin" cx="0.42" cy="0.36" r="0.72">
+      <stop offset="0" stop-color="#FFD166"/>
+      <stop offset="0.6" stop-color="var(--primary, #FFB300)"/>
+      <stop offset="1" stop-color="#8a5f00"/>
+    </radialGradient>
+    <linearGradient id="strip" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFB300" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#FFB300" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#FFB300" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="badge"><rect x="24" y="24" width="464" height="464" rx="112"/></clipPath>
+  </defs>
+
+  <!-- badge -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bg)"/>
+  <g clip-path="url(#badge)">
+    <!-- clashing diagonal strips: red from left, cyan from right -->
+    <g transform="rotate(-35 256 256)">
+      <rect x="-120" y="150" width="380" height="3" fill="#FF3D5A" opacity="0.35"/>
+      <rect x="-120" y="360" width="420" height="3" fill="#FF3D5A" opacity="0.22"/>
+    </g>
+    <g transform="rotate(35 256 256)">
+      <rect x="252" y="150" width="380" height="3" fill="#22D3EE" opacity="0.35"/>
+      <rect x="212" y="360" width="420" height="3" fill="#22D3EE" opacity="0.22"/>
+    </g>
+    <g transform="rotate(-35 256 256)"><rect x="-120" y="255" width="760" height="2.5" fill="url(#strip)"/></g>
+    <!-- sparks -->
+    <g fill="#fff3dd">
+      <circle cx="104" cy="100" r="2.4" opacity="0.8"/>
+      <circle cx="414" cy="118" r="1.8" opacity="0.6"/>
+      <circle cx="372" cy="70" r="1.5" opacity="0.5"/>
+      <circle cx="92" cy="190" r="1.5" opacity="0.45"/>
+    </g>
+  </g>
+
+  <!-- gold coin-ball (the purse) -->
+  <g filter="url(#glow)">
+    <circle cx="256" cy="286" r="86" fill="url(#coin)" stroke="#5b3f00" stroke-width="4"/>
+    <!-- pentagon seam = football -->
+    <path d="M256 236 L303.5 270.5 L285.4 326.4 L226.6 326.4 L208.5 270.5 Z" fill="none" stroke="#5b3f00" stroke-width="6" stroke-linejoin="round" opacity="0.85"/>
+    <circle cx="256" cy="286" r="86" fill="none" stroke="#FFD166" stroke-width="3" opacity="0.7"/>
+  </g>
+
+  <!-- blades: red (from bottom-left) vs cyan (from bottom-right) crossing above the coin -->
+  <g stroke-linecap="round" filter="url(#glow)">
+    <path d="M132 402 L336 158" stroke="url(#bladeRed)" stroke-width="34"/>
+    <path d="M380 402 L176 158" stroke="url(#bladeCyan)" stroke-width="34"/>
+    <!-- hilts -->
+    <path d="M112 380 L166 424" stroke="#FF3D5A" stroke-width="16"/>
+    <path d="M400 380 L346 424" stroke="#22D3EE" stroke-width="16"/>
+  </g>
+
+  <!-- clash spark at the crossing point -->
+  <g filter="url(#glow)">
+    <path d="M256 168 L266 208 L306 218 L266 228 L256 268 L246 228 L206 218 L246 208 Z" fill="#FFD166"/>
+    <circle cx="256" cy="218" r="12" fill="#ffffff"/>
+  </g>
+</svg>

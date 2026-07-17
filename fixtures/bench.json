@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-07-12T00:58:20.071Z",
+  "entry_402_quote": {
+    "samples": 60,
+    "p50_ms": 0.5,
+    "p95_ms": 2.99,
+    "note": "Local 402 emit + parse round-trip (no on-chain settlement — funds-gated)."
+  },
+  "settlement_decision": {
+    "samples": 1000,
+    "p50_ms": 0.0036,
+    "p95_ms": 0.0061,
+    "note": "Pure decideSettlement() — whistle → winner decision + decision_hash."
+  }
+}
