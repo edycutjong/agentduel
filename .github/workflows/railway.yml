@@ -1,8 +1,9 @@
 name: Deploy API to Railway
 
-# Deploys the Express x402 API (Dockerfile) to Railway.
-# Required repo secret:   RAILWAY_TOKEN   (a Railway *project* token)
-# Required repo variable:  RAILWAY_SERVICE (the Railway service name, e.g. "agentduel-api")
+# Deploys the Express x402 arena API (Dockerfile) to Railway.
+# Optional repo secret:   RAILWAY_TOKEN   (a Railway *project* token)
+# Optional repo variable: RAILWAY_SERVICE (Railway service name; defaults to "agentduel")
+# The API is CLI-deployed; without RAILWAY_TOKEN this job green-skips instead of failing.
 on:
   push:
     branches: [main]
@@ -17,19 +18,28 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Skip cleanly on forks / when the token isn't configured
-    # (the APIs are CLI-deployed; add a RAILWAY_TOKEN project token to enable CI deploys).
-    if: ${{ github.repository_owner == 'edycutjong' && secrets.RAILWAY_TOKEN != '' }}
+    if: ${{ github.repository_owner == 'edycutjong' }}
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
     steps:
+      - name: Check for RAILWAY_TOKEN
+        id: token
+        run: |
+          if [ -z "$RAILWAY_TOKEN" ]; then
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::RAILWAY_TOKEN not configured — skipping CI deploy (API is CLI-deployed)."
+          else
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/checkout@v7
+        if: steps.token.outputs.present == 'true'
       - uses: actions/setup-node@v7
+        if: steps.token.outputs.present == 'true'
         with:
           node-version: 20
       - name: Install Railway CLI
+        if: steps.token.outputs.present == 'true'
         run: npm install -g @railway/cli
       - name: Deploy
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        if: steps.token.outputs.present == 'true'
         run: railway up --service "${{ vars.RAILWAY_SERVICE || 'agentduel' }}" --ci
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
