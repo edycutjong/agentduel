@@ -26,9 +26,17 @@ describe('football-data results (real snapshot)', () => {
     expect(r!.result_source).toMatch(/PENALTY|REGULAR|EXTRA/);
   });
 
-  it('returns null for a not-yet-played fixture (SF FRA vs ESP, 537387 TIMED)', () => {
+  it('returns null while a fixture is not FINISHED (TIMED — snapshot-refresh-proof)', () => {
+    // synthetic TIMED status over a real match shape: stays green no matter how
+    // often the committed snapshot is re-archived as the tournament plays out
+    const timed = { ...findMatch(snapshot(), 537390)!, status: 'TIMED' } as FdMatch;
+    expect(resultFromMatch(timed)).toBeNull();
+  });
+
+  it('maps the played SF (FRA vs ESP, 537387) to its AWAY_TEAM result', () => {
     const r = resultFromMatch(findMatch(snapshot(), 537387));
-    expect(r).toBeNull();
+    expect(r).not.toBeNull();
+    expect(r!.outcome).toBe('AWAY_TEAM'); // Spain advanced — the Final is ESP vs ARG
   });
 
   it('builds a stage-prefixed fixture label', () => {
