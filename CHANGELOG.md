@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/edycutjong/agentduel/compare/v1.1.0...v1.2.0) (2026-07-17)
+
+
+### Features
+
+* **docs:** restyle pitch deck to fight-night arena design system (reveals, count-ups, print-safe) ([cbbfe32](https://github.com/edycutjong/agentduel/commit/cbbfe322c5961f4178bed3c8a9e86bcf050a636f))
+
 # [1.1.0](https://github.com/edycutjong/agentduel/compare/v1.0.0...v1.1.0) (2026-07-17)
 
 
