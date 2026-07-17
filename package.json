@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "AgentDuel — two agents stake opposing World Cup picks over Injective x402; the match settles from real results and the winner is paid on-chain. The receipt IS the pre-kickoff commitment.",
+  "description": "AgentDuel \u2014 two agents stake opposing World Cup picks over Injective x402; the match settles from real results and the winner is paid on-chain. The receipt IS the pre-kickoff commitment.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/edycutjong/agentduel.git"
@@ -63,5 +63,6 @@
     "tmp": "^0.2.6",
     "cookie": "^0.7.2",
     "uuid": "^11.1.1"
-  }
+  },
+  "homepage": "https://agentduel.edycu.dev"
 }
