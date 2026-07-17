@@ -47,14 +47,14 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
-    "@lhci/cli": "^0.14.0",
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.52.0",
     "@types/better-sqlite3": "^7.6.12",
     "@types/express": "^4.17.21",
     "@types/node": "^22.10.5",
     "eslint": "^9.18.0",
     "globals": "^15.14.0",
-    "tsx": "^4.19.2",
+    "tsx": "^4.23.1",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0",
     "vitest": "^4.1.10"
