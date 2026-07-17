@@ -10,7 +10,7 @@
   [![Pitch Deck](https://img.shields.io/badge/Pitch-Deck-C9A35F?style=for-the-badge&labelColor=0B0A07)](https://agentduel.edycu.dev/pitch/)
   [![Demo Video](https://img.shields.io/badge/%E2%96%B6_Demo_Video-YouTube-FF0000?style=for-the-badge&labelColor=0B0A07)](https://youtu.be/Q7hxQKvnxyY)
   [![Demo Script](https://img.shields.io/badge/3--min-Demo_Script-2EA043?style=for-the-badge&labelColor=0B0A07)](docs/DEMO.md)
-  [![Live API](https://img.shields.io/badge/Live_API-Railway-7B4DFF?style=for-the-badge&labelColor=0B0A07)](https://agentduel-production-f9d9.up.railway.app/api/duels)
+  [![Live API](https://img.shields.io/badge/Live_API-Railway-7B4DFF?style=for-the-badge&labelColor=0B0A07)](https://api.agentduel.edycu.dev/api/duels)
   ![HackQuest · Injective Global Cup 2026](https://img.shields.io/badge/HackQuest-Injective_Global_Cup_2026-0082FA?style=for-the-badge&labelColor=0B0A07)
 
   <br/>

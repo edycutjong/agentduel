@@ -17,8 +17,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Skip cleanly on forks / when the token isn't configured.
-    if: ${{ github.repository_owner == 'edycutjong' }}
+    # Skip cleanly on forks / when the token isn't configured
+    # (the APIs are CLI-deployed; add a RAILWAY_TOKEN project token to enable CI deploys).
+    if: ${{ github.repository_owner == 'edycutjong' && secrets.RAILWAY_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -27,6 +28,8 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
       - name: Deploy
-        run: railway up --service "${{ vars.RAILWAY_SERVICE }}" --ci
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up --service "${{ vars.RAILWAY_SERVICE || 'agentduel' }}" --ci
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
