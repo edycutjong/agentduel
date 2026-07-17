@@ -39,7 +39,7 @@
   "dependencies": {
     "@injectivelabs/x402": "^0.0.1",
     "better-sqlite3": "^11.8.1",
-    "dotenv": "^16.4.7",
+    "dotenv": "^17.4.2",
     "express": "^4.21.2",
     "node-cron": "^4.6.0",
     "viem": "^2.21.54",
