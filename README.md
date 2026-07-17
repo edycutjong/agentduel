@@ -19,7 +19,7 @@
   ![Node.js](https://img.shields.io/badge/Node.js_%E2%89%A518-339933?style=flat&logo=node.js&logoColor=white)
   ![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
   ![Next.js](https://img.shields.io/badge/Next.js_14-black?style=flat&logo=next.js)
-  ![Vitest](https://img.shields.io/badge/Vitest-52_passing-6E9F18?style=flat&logo=vitest&logoColor=white)
+  ![Vitest](https://img.shields.io/badge/Vitest-53_passing-6E9F18?style=flat&logo=vitest&logoColor=white)
   ![Injective EVM](https://img.shields.io/badge/Injective_EVM-eip155%3A1776-0082FA?style=flat)
   ![x402](https://img.shields.io/badge/x402-HTTP_402_paywall-C9A35F?style=flat)
   [![CI](https://github.com/edycutjong/agentduel/actions/workflows/ci.yml/badge.svg)](https://github.com/edycutjong/agentduel/actions/workflows/ci.yml)
@@ -32,6 +32,17 @@
 > **About the banner** — it's an *illustrative* arena poster: the Final is unplayed and the `0x…` hashes shown in it are decorative. Nothing in this repo fakes a receipt — real money is funds-gated and mock settlements are labeled `mock-tx-…` (never a `0x` hash). The gray badge is an honest placeholder: the live arena URL goes live on deploy (see **[STATUS.md](docs/STATUS.md)**). The **[demo video](https://youtu.be/Q7hxQKvnxyY)** is live — every beat in it runs zero-funds, with mocks labeled on camera.
 
 A minimal duel arena that performs the x402 promise — autonomous agents committing capital with no accounts, no humans — as sport. **The ONE flow with depth: enter → commit → settle → payout, twice per duel.**
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/02_gate.png" alt="The x402 stake gate — HTTP 402 quoting a 0.10 USDC entry on Injective EVM"/><br/><sub><b>The x402 stake gate, live</b> — HTTP 402 quotes a 0.10 USDC entry on <code>eip155:1776</code></sub></td>
+    <td width="50%"><img src="docs/screenshots/06_settle.png" alt="Idempotent settlement — double-run pays once, mock settlements labeled mock-tx"/><br/><sub><b>Deterministic settlement</b> — idempotent (double-run pays once), mocks labeled <code>mock-tx-…</code></sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/05_replay.png" alt="Replay verification — identical decision hash reproduced from scratch"/><br/><sub><b>Replay ✓ IDENTICAL</b> — anyone can reproduce the decision hash from scratch</sub></td>
+    <td width="50%"><img src="docs/screenshots/01_arena.png" alt="The AgentDuel arena — RED vs CYAN duelists"/><br/><sub><b>The arena</b> — Agent RED vs Agent CYAN, opposing stakes on one match</sub></td>
+  </tr>
+</table>
 
 ---
 
@@ -54,7 +65,7 @@ The thesis is falsifiability, so **nothing is faked**:
 
 ```bash
 npm install
-npm test     # 52 tests: slot matching · settlement idempotency · void math · pick-hash · 402 quote
+npm test     # 53 tests: slot matching · settlement idempotency · void math · pick-hash · 402 quote
 npm run api  # arena API on http://localhost:8403 (seeds itself)
 
 # prove the x402 entry gate with no funds:
@@ -170,7 +181,7 @@ web/       Next.js one-route arena page (versus cards · receipts · score · pa
 skills/agent-duel/SKILL.md
 scripts/   replay (--render) · settle · bench · spawn-duelists · entry/payout smoke · readiness
 fixtures/  edge-pick.json (recorded) · seed-duels · duel-rehearsal · wc-matches (real snapshot)
-test/      52 vitest
+test/      53 vitest
 ```
 
 ## 🧪 Testing & CI
@@ -183,7 +194,7 @@ build + Playwright + Lighthouse). Everything below runs with **zero funds**.
 
 ```bash
 # ── root: logic + x402 API ──────────────────
-npm test            # vitest — 52 tests (green)
+npm test            # vitest — 53 tests (green)
 npm run typecheck   # tsc --noEmit
 npm run ci          # typecheck + tests (quality gate)
 
@@ -199,7 +210,7 @@ make security-scan  # npm audit + license check
 | Layer | Tool | Status |
 |---|---|---|
 | Code quality | TypeScript `tsc --noEmit` (strict) | ✅ |
-| Unit testing | Vitest — 52 tests, 8 files | ✅ |
+| Unit testing | Vitest — 53 tests, 8 files | ✅ |
 | E2E testing | Playwright — 3 specs (demo-mode · arena · responsive) | ✅ |
 | Security (SAST) | CodeQL (`javascript-typescript`) | ✅ |
 | Security (SCA) | Dependabot (root + `web/` + actions) + `npm audit` | ✅ |
