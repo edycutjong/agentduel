@@ -18,234 +18,418 @@
 <meta name="twitter:image" content="https://edycutjong.github.io/agentduel/og-image.png">
 <link rel="icon" href="../icon.svg">
 <meta name="theme-color" content="#0B0A10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AGENTDUEL — PITCH DECK, FIGHT-NIGHT ARENA POSTER EDITION
+   Matches the landing page design system:
+   crimson (RED corner) vs electric cyan (CYAN corner) over
+   dark charcoal; gold = the pot. Archivo Black italic display,
+   Space Grotesk body. Diagonal stripes + drifting spotlights.
+   Motion: transform/opacity only; killed under reduced-motion
+   and in print.
+   ============================================================ */
+:root{
+  --red:#FF3D5A; --red-br:#FF7A90; --red-dp:#8f1226;
+  --cyan:#22D3EE; --cyan-br:#67E8F9; --cyan-dp:#0b5f70;
+  --gold:#FFB300; --gold-br:#FFD166; --gold-dp:#B37D00;
+  --bg:#0B0A10; --bg2:#110e1a; --bg3:#0e0c15; --card:#17141f; --line:#2a2436;
+  --hi:#F8F5FB; --mid:#A9A3B8; --low:#7d7590;
+  --win:#22C55E;
+  --fd:"Archivo Black", "Arial Black", sans-serif;
+  --fb:"Space Grotesk", system-ui, sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --punch:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box}
+html{scroll-snap-type:y mandatory; scroll-behavior:smooth; background:var(--bg)}
+body{margin:0; font-family:var(--fb); color:var(--hi); -webkit-font-smoothing:antialiased; background:var(--bg); overflow-x:hidden}
+a{color:var(--gold-br); text-decoration:none}
+p{margin:0}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+.disp{font-family:var(--fd); font-style:italic; letter-spacing:-.01em; text-transform:uppercase}
+
+/* ---------- ambient arena backdrop (spotlight drift) ---------- */
+.arena-bg{position:fixed; inset:-20%; z-index:-2; pointer-events:none;
+  background:
+    radial-gradient(52rem 40rem at 14% 6%, rgba(255,61,90,.13), transparent 58%),
+    radial-gradient(52rem 40rem at 86% 6%, rgba(34,211,238,.13), transparent 58%),
+    radial-gradient(46rem 36rem at 50% 108%, rgba(255,179,0,.09), transparent 60%);
+  animation:spotDrift 26s ease-in-out infinite alternate}
+@keyframes spotDrift{
+  0%{transform:translate3d(-1.5%,0,0) scale(1)}
+  100%{transform:translate3d(1.5%,1%,0) scale(1.05)}}
+.arena-stripes{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.05;
+  background:repeating-linear-gradient(-52deg, transparent 0 26px, var(--hi) 26px 27px)}
+
+/* ---------- slide frame ---------- */
+.slide{width:100vw; min-height:100vh; scroll-snap-align:start; display:grid; place-items:center; padding:4vh 5vw}
+.inner{width:min(1180px,100%); aspect-ratio:16/9;
+  background:
+    radial-gradient(46rem 30rem at 0% 0%, rgba(255,61,90,.09), transparent 58%),
+    radial-gradient(46rem 30rem at 100% 0%, rgba(34,211,238,.09), transparent 58%),
+    radial-gradient(40rem 26rem at 50% 118%, rgba(255,179,0,.07), transparent 60%),
+    linear-gradient(180deg,var(--bg2),#0a0810);
+  border:1px solid var(--line); border-radius:18px; padding:clamp(26px,4.4vw,60px);
+  display:flex; flex-direction:column; position:relative; overflow:hidden;
+  box-shadow:0 40px 120px -50px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.03)}
+.inner::after{content:""; position:absolute; inset:0; pointer-events:none; opacity:.045;
+  background:repeating-linear-gradient(-52deg, transparent 0 26px, var(--hi) 26px 27px)}
+.strip{position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--red),var(--gold) 52%,var(--cyan)); z-index:1}
+/* ghost round numeral, like the landing's feature cards */
+.ghostnum{position:absolute; right:22px; bottom:2px; font-family:var(--fd); font-style:italic; font-size:clamp(90px,13vw,170px); line-height:1; color:rgba(248,245,251,.04); pointer-events:none; user-select:none; z-index:0}
+.inner>*{position:relative; z-index:1}
+
+.eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--mid); font-weight:700; display:flex; gap:12px; align-items:center}
+.eyebrow b{color:var(--gold); font-weight:800}
+.num{margin-left:auto; color:var(--low); letter-spacing:.1em}
+h1{font-family:var(--fd); font-style:italic; text-transform:uppercase; font-size:clamp(38px,6.6vw,92px); line-height:.92; margin:0; font-weight:400; letter-spacing:-.01em; text-wrap:balance}
+h2{font-family:var(--fd); font-style:italic; text-transform:uppercase; font-size:clamp(23px,3.4vw,44px); line-height:1.04; margin:0; font-weight:400; letter-spacing:-.01em; text-wrap:balance}
+.lede{font-size:clamp(15px,1.65vw,21px); color:var(--mid); line-height:1.55; max-width:66ch; margin:0}
+.lede b{color:var(--hi)}
+.grad{background:linear-gradient(92deg,var(--gold-br),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.push{margin-top:auto}
+.row{display:flex; gap:14px; flex-wrap:wrap}
+.col{display:flex; flex-direction:column; gap:14px}
+.center{justify-content:center; text-align:center; align-items:center}
+.big{font-size:clamp(18px,2.2vw,27px); font-weight:700; letter-spacing:-.01em; line-height:1.3; text-wrap:balance}
+.muted{color:var(--mid)}
+
+/* ---------- chips (landing badge style) ---------- */
+.chip{display:inline-flex; align-items:center; gap:9px; padding:8px 14px; border:1px solid var(--line); border-radius:999px; background:#100d18; font-size:13px; transition:transform .2s var(--ease), border-color .2s var(--ease)}
+.chip:hover{transform:translateY(-2px); border-color:var(--gold-dp)}
+.chip .k{color:var(--low); text-transform:uppercase; letter-spacing:.14em; font-size:10.5px; font-weight:700; font-family:var(--mono)}
+.ok{color:var(--win); font-weight:700}
+
+/* ---------- versus / duel motif (landing match card) ---------- */
+.versus{display:grid; grid-template-columns:1fr auto 1fr; gap:0; width:100%; align-items:stretch}
+.fighter{position:relative; border:1px solid var(--line); padding:20px 22px; background:linear-gradient(180deg,var(--card),var(--bg3)); display:flex; flex-direction:column; gap:9px; transition:transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease)}
+.fighter.red{border-top:3px solid var(--red); border-radius:18px 0 0 18px}
+.fighter.cyan{border-top:3px solid var(--cyan); border-radius:0 18px 18px 0; text-align:right; align-items:flex-end}
+.fighter.red:hover{transform:translateY(-4px) rotate(-.4deg); border-color:var(--red); box-shadow:0 22px 50px -24px rgba(255,61,90,.55)}
+.fighter.cyan:hover{transform:translateY(-4px) rotate(.4deg); border-color:var(--cyan); box-shadow:0 22px 50px -24px rgba(34,211,238,.55)}
+.fighter .name{font-family:var(--fd); font-style:italic; text-transform:uppercase; font-size:22px; letter-spacing:.02em}
+.fighter.red .name{color:var(--red-br)} .fighter.cyan .name{color:var(--cyan-br)}
+.fighter .strat{color:var(--mid); font-size:13.5px; line-height:1.5}
+.fighter .stake{font-family:var(--mono); font-size:12.5px; color:var(--gold-br); border:1px dashed var(--line); border-radius:8px; padding:5px 10px; align-self:flex-start}
+.fighter.cyan .stake{align-self:flex-end}
+.vs{display:grid; place-items:center; padding:0 clamp(14px,2.4vw,26px); font-family:var(--fd); font-style:italic; font-size:clamp(26px,4vw,44px); color:var(--gold); text-shadow:0 0 34px rgba(255,179,0,.55); position:relative; user-select:none}
+.vs::before{content:""; position:absolute; top:12%; bottom:12%; left:50%; width:2px; transform:translateX(-50%); background:linear-gradient(var(--red),var(--gold),var(--cyan)); opacity:.4}
+
+/* ---------- cards (landing feature style) ---------- */
+.cards{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.cards.four{grid-template-columns:repeat(4,1fr)} .cards.three{grid-template-columns:repeat(3,1fr)}
+.card{position:relative; background:linear-gradient(180deg,var(--card),var(--bg3)); border:1px solid var(--line); border-radius:18px; padding:18px; display:flex; flex-direction:column; gap:6px; overflow:hidden; transition:transform .24s var(--ease), border-color .24s var(--ease), box-shadow .24s var(--ease)}
+.card:hover{transform:translateY(-5px)}
+.card.f-red:hover{border-color:var(--red); box-shadow:0 26px 56px -28px rgba(255,61,90,.5)}
+.card.f-cyan:hover{border-color:var(--cyan); box-shadow:0 26px 56px -28px rgba(34,211,238,.5)}
+.card.f-gold:hover,.card:not(.f-red):not(.f-cyan):hover{border-color:var(--gold); box-shadow:0 26px 56px -28px rgba(255,179,0,.5)}
+.card .h{font-family:var(--fd); font-style:italic; text-transform:uppercase; font-size:15px; letter-spacing:.01em}
+.card .d{color:var(--mid); font-size:13px; line-height:1.5}
+.card .d i{color:var(--hi); font-style:italic}
+.card .kx{font-family:var(--mono); font-size:11.5px; color:var(--gold-br); letter-spacing:.06em; text-transform:uppercase}
+
+/* ---------- hash receipt rows ---------- */
+.hashes{display:flex; flex-direction:column; gap:8px; width:100%; font-family:var(--mono); font-size:13.5px}
+.hline{display:flex; align-items:center; gap:12px; padding:11px 14px; background:#100d18; border:1px solid var(--line); border-radius:10px; transition:transform .2s var(--ease), border-color .2s var(--ease)}
+.hline:hover{transform:translateX(4px); border-color:var(--gold-dp)}
+.hline .n{color:var(--low); width:26px; font-family:var(--fd); font-style:italic; font-size:14px}
+.hline .lbl{color:var(--mid); flex:1} .hline .h{color:var(--gold-br)}
+
+/* ---------- stats ---------- */
+.stat{font-family:var(--fd); font-style:italic; font-size:clamp(26px,3.6vw,46px); font-weight:400; line-height:1; letter-spacing:-.01em; color:var(--gold-br)}
+
+/* ---------- fixed chrome: dots, progress, hint ---------- */
+.nav{position:fixed; right:16px; bottom:16px; display:flex; gap:7px; align-items:center; z-index:10}
+.dot{width:9px; height:9px; border-radius:50%; background:#2c2638; border:0; padding:0; cursor:pointer; transition:transform .25s var(--punch), background .25s var(--ease), box-shadow .25s var(--ease)}
+.dot:hover{transform:scale(1.4)}
+.dot[aria-current="true"]{background:var(--gold); box-shadow:0 0 10px var(--gold); transform:scale(1.25)}
+.progress{position:fixed; top:0; left:0; right:0; height:3px; z-index:11; background:rgba(42,36,54,.5)}
+.progress .fill{height:100%; width:100%; background:linear-gradient(90deg,var(--red),var(--gold) 52%,var(--cyan)); transform:scaleX(0); transform-origin:left; transition:transform .5s var(--ease)}
+.pageno{position:fixed; right:16px; top:14px; z-index:10; font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; color:var(--low)}
+.pageno b{color:var(--gold-br); font-weight:600}
+.hint{position:fixed; left:16px; bottom:14px; color:var(--low); font-size:11.5px; letter-spacing:.08em; z-index:10; font-family:var(--mono)}
+
+/* ---------- entrance reveals (per-slide, IntersectionObserver) ---------- */
+html.js .rv{opacity:0; transform:translate3d(0,26px,0); transition:opacity .7s var(--ease), transform .7s var(--ease); transition-delay:var(--d,0ms)}
+html.js .rv-l{transform:translate3d(-48px,0,0)}
+html.js .rv-r{transform:translate3d(48px,0,0)}
+html.js .slide.active .rv{opacity:1; transform:none}
+@keyframes vsPunch{
+  0%{opacity:0; transform:scale(.2) rotate(-14deg)}
+  62%{opacity:1; transform:scale(1.28) rotate(3deg)}
+  100%{opacity:1; transform:scale(1) rotate(0)}}
+@keyframes goldPulse{0%,100%{text-shadow:0 0 24px rgba(255,179,0,.35)}50%{text-shadow:0 0 48px rgba(255,179,0,.75)}}
+html.js .vs{opacity:0}
+html.js .slide.active .vs{opacity:1; animation:vsPunch .65s var(--punch) .55s both, goldPulse 3.2s ease-in-out 1.4s infinite}
+
+@media (max-width:820px){
+  .inner{aspect-ratio:auto; min-height:88vh}
+  .cards,.cards.four,.cards.three{grid-template-columns:1fr 1fr}
+  h1{font-size:44px}
+  .versus{grid-template-columns:1fr}
+  .fighter.red,.fighter.cyan{border-radius:18px; text-align:left; align-items:flex-start}
+  .fighter.cyan .stake{align-self:flex-start}
+  .vs{padding:14px}
+  .vs::before{display:none}
+}
+
+/* ---------- reduced motion: kill everything ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; transition-delay:0ms !important}
+  html{scroll-behavior:auto}
+  html.js .rv,html.js .rv-l,html.js .rv-r{opacity:1 !important; transform:none !important}
+  html.js .vs{opacity:1 !important; animation:none !important}
+  .arena-bg{animation:none !important}
+}
+
+/* ---------- print: one slide per page, judges get the PDF ---------- */
+@media print{
+  @page{size:1280px 720px; margin:0}
+  html,body{background:var(--bg)}
+  .nav,.hint,.progress,.pageno,.arena-bg,.arena-stripes{display:none}
+  .slide{width:1280px; height:720px; min-height:0; padding:22px; page-break-after:always; break-after:page; scroll-snap-align:none}
+  .inner{aspect-ratio:auto; height:100%; box-shadow:none}
+  .grad{background:none; -webkit-text-fill-color:#FFD166; color:#FFD166}
+  html.js .rv,html.js .rv-l,html.js .rv-r{opacity:1 !important; transform:none !important; transition:none !important}
+  html.js .vs{opacity:1 !important; animation:none !important}
+  *,*::before,*::after{animation:none !important; transition:none !important}
+  *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<style>
-  :root{
-    --gold:#FFB300; --gold-br:#FFD166; --gold-dp:#B37D00;
-    --red:#FF3D5A; --red-br:#FF7A90;
-    --cyan:#22D3EE; --cyan-br:#67E8F9;
-    --bg:#0B0A10; --bg2:#12101a; --card:#17141f; --line:#2a2436;
-    --hi:#F8F5FB; --mid:#A29CB0; --low:#6b6478;
-    --win:#22C55E;
-    --fd:"Helvetica Neue", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --mono:ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-  }
-  *{box-sizing:border-box}
-  html{scroll-snap-type:y mandatory; scroll-behavior:smooth; background:var(--bg)}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{margin:0; font-family:var(--fd); color:var(--hi); -webkit-font-smoothing:antialiased; background:
-    radial-gradient(1000px 720px at 12% -12%, rgba(255,61,90,.10), transparent 56%),
-    radial-gradient(1000px 720px at 88% -12%, rgba(34,211,238,.10), transparent 56%),
-    radial-gradient(900px 700px at 50% 118%, rgba(255,179,0,.09), transparent 58%), var(--bg)}
-  .mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
-
-  .slide{width:100vw; min-height:100vh; scroll-snap-align:start; display:grid; place-items:center; padding:4vh 5vw}
-  .inner{width:min(1180px,100%); aspect-ratio:16/9; background:linear-gradient(180deg,var(--bg2),#0a0810);
-    border:1px solid var(--line); border-radius:18px; padding:clamp(26px,4.4vw,64px);
-    display:flex; flex-direction:column; position:relative; overflow:hidden;
-    box-shadow:0 40px 120px -50px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.03)}
-  .inner::after{content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
-    background:repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.012) 3px 4px)}
-  .strip{position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--red),var(--gold) 52%,var(--cyan))}
-
-  .eyebrow{font-size:12.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--mid); font-weight:700; display:flex; gap:12px; align-items:center}
-  .eyebrow b{color:var(--gold); font-weight:800}
-  .num{margin-left:auto; color:var(--low); letter-spacing:.1em}
-  h1{font-size:clamp(40px,7vw,98px); line-height:.9; margin:0; font-weight:800; letter-spacing:-.03em; text-wrap:balance}
-  h2{font-size:clamp(26px,3.9vw,52px); line-height:1.02; margin:0; font-weight:800; letter-spacing:-.02em; text-wrap:balance}
-  .lede{font-size:clamp(16px,1.75vw,23px); color:var(--mid); line-height:1.5; max-width:62ch; margin:0}
-  .grad{background:linear-gradient(92deg,var(--gold-br),var(--red-br)); -webkit-background-clip:text; background-clip:text; color:transparent}
-  p{margin:0}
-  .push{margin-top:auto}
-  .row{display:flex; gap:14px; flex-wrap:wrap}
-  .col{display:flex; flex-direction:column; gap:14px}
-  .center{justify-content:center; text-align:center; align-items:center}
-  .big{font-size:clamp(20px,2.4vw,30px); font-weight:800; letter-spacing:-.01em; line-height:1.25; text-wrap:balance}
-  .muted{color:var(--mid)}
-
-  .chip{display:inline-flex; align-items:center; gap:9px; padding:7px 13px; border:1px solid var(--line); border-radius:999px; background:#100d18; font-size:13px}
-  .chip .k{color:var(--low); text-transform:uppercase; letter-spacing:.14em; font-size:10.5px; font-weight:700; font-family:var(--fd)}
-  .ok{color:var(--win); font-weight:700}
-
-  /* versus / duel motif */
-  .versus{display:grid; grid-template-columns:1fr auto 1fr; gap:0; width:100%; align-items:stretch}
-  .fighter{border:1px solid var(--line); padding:20px 22px; background:#100d18; display:flex; flex-direction:column; gap:9px}
-  .fighter.red{border-color:rgba(255,61,90,.45); border-radius:14px 0 0 14px; box-shadow:inset 0 0 40px -20px var(--red)}
-  .fighter.cyan{border-color:rgba(34,211,238,.45); border-radius:0 14px 14px 0; box-shadow:inset 0 0 40px -20px var(--cyan); text-align:right; align-items:flex-end}
-  .fighter .name{font-weight:800; font-size:20px; letter-spacing:.02em}
-  .fighter.red .name{color:var(--red-br)} .fighter.cyan .name{color:var(--cyan-br)}
-  .fighter .strat{color:var(--mid); font-size:13px; line-height:1.4}
-  .fighter .stake{font-family:var(--mono); font-size:13px; color:var(--gold-br)}
-  .vs{display:grid; place-items:center; padding:0 20px; font-weight:800; font-size:26px; color:var(--gold); font-family:var(--mono); position:relative}
-  .vs::before{content:""; position:absolute; top:12%; bottom:12%; width:1px; background:linear-gradient(var(--red),var(--gold),var(--cyan)); opacity:.5}
-
-  .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-  .cards.four{grid-template-columns:repeat(4,1fr)} .cards.three{grid-template-columns:repeat(3,1fr)}
-  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:6px}
-  .card .h{font-weight:800; font-size:15.5px; letter-spacing:-.01em}
-  .card .d{color:var(--mid); font-size:13px; line-height:1.42}
-  .card .kx{font-family:var(--mono); font-size:11.5px; color:var(--gold-br)}
-  .hashes{display:flex; flex-direction:column; gap:8px; width:100%; font-family:var(--mono); font-size:13.5px}
-  .hline{display:flex; align-items:center; gap:12px; padding:11px 14px; background:#100d18; border:1px solid var(--line); border-radius:10px}
-  .hline .n{color:var(--low); width:26px} .hline .lbl{color:var(--mid); flex:1} .hline .h{color:var(--gold-br)}
-  .stat{font-family:var(--mono); font-size:clamp(26px,3.6vw,46px); font-weight:700; line-height:1; letter-spacing:-.02em}
-  a{color:var(--gold-br); text-decoration:none}
-
-  .nav{position:fixed; right:16px; bottom:16px; display:flex; gap:6px; z-index:10}
-  .dot{width:8px; height:8px; border-radius:50%; background:#2c2638; border:0; padding:0; cursor:pointer}
-  .dot[aria-current="true"]{background:var(--gold); box-shadow:0 0 10px var(--gold)}
-  .hint{position:fixed; left:16px; bottom:14px; color:var(--low); font-size:11.5px; letter-spacing:.08em; z-index:10; font-family:var(--mono)}
-
-  @media (max-width:820px){ .inner{aspect-ratio:auto; min-height:88vh} .cards,.cards.four,.cards.three{grid-template-columns:1fr 1fr} h1{font-size:50px} .versus{grid-template-columns:1fr} .fighter.red,.fighter.cyan{border-radius:14px; text-align:left; align-items:flex-start} .vs{padding:14px} }
-  @media print{
-    @page{size:1280px 720px; margin:0}
-    html,body{background:var(--bg)}
-    .nav,.hint{display:none}
-    .slide{width:1280px; height:720px; min-height:0; padding:22px; page-break-after:always; break-after:page; scroll-snap-align:none}
-    .inner{aspect-ratio:auto; height:100%; box-shadow:none}
-    .grad{background:none; -webkit-text-fill-color:#FFD166; color:#FFD166}
-    *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
-  }
-</style>
+<div class="arena-bg" aria-hidden="true"></div>
+<div class="arena-stripes" aria-hidden="true"></div>
 
 <section class="slide"><div class="inner">
   <div class="strip"></div>
-  <div class="eyebrow"><b>Injective Global Cup</b> · x402 · MCP <span class="num">AgentDuel · 01</span></div>
+  <span class="ghostnum" aria-hidden="true">01</span>
+  <div class="eyebrow rv"><b>Injective Global Cup</b> · x402 · MCP <span class="num">AgentDuel · 01</span></div>
   <div class="push"></div>
-  <h1>Agent<span class="grad">Duel</span></h1>
-  <p class="big" style="margin-top:16px">Two agents, one match, <span class="grad">on-chain settlement</span>.</p>
-  <p class="lede" style="margin-top:16px">Two AIs watched the same World Cup Final. They disagreed.<br>So they <b style="color:var(--hi)">put money on it</b> — and no human touched a button.</p>
+  <h1 class="rv" style="--d:100ms">Agent<span class="grad">Duel</span></h1>
+  <p class="big rv" style="margin-top:16px; --d:220ms">Two agents, one match, <span class="grad">on-chain settlement</span>.</p>
+  <p class="lede rv" style="margin-top:16px; --d:340ms">Two AIs watched the same World Cup Final. They disagreed.<br>So they <b style="color:var(--hi)">put money on it</b> — and no human touched a button.</p>
   <div class="push"></div>
   <div class="row" style="align-items:center">
-    <span class="chip"><span class="k" style="color:var(--red-br)">RED</span> <span class="mono">stake 0.10 USDC</span></span>
-    <span class="chip"><span class="k" style="color:var(--cyan-br)">CYAN</span> <span class="mono">stake 0.10 USDC</span></span>
-    <span class="chip"><span class="k">winner</span> <span class="mono ok">paid 0.18 on-chain</span></span>
-    <span class="mono" style="margin-left:auto; color:var(--low); font-size:12.5px">x402 · MCP · CCTP · Skills</span>
+    <span class="chip rv rv-l" style="--d:460ms"><span class="k" style="color:var(--red-br)">RED</span> <span class="mono">stake 0.10 USDC</span></span>
+    <span class="chip rv rv-r" style="--d:560ms"><span class="k" style="color:var(--cyan-br)">CYAN</span> <span class="mono">stake 0.10 USDC</span></span>
+    <span class="chip rv" style="--d:660ms"><span class="k" style="color:var(--gold)">winner</span> <span class="mono ok">paid 0.18 on-chain</span></span>
+    <span class="mono rv" style="margin-left:auto; color:var(--low); font-size:12.5px; --d:760ms">x402 · MCP · CCTP · Skills</span>
   </div>
 </div></section>
 
 <section class="slide"><div class="inner">
   <div class="strip"></div>
-  <div class="eyebrow">The problem <span class="num">02</span></div>
-  <h2 style="margin-top:20px">AI predictions are <span class="grad">unfalsifiable theater</span>.</h2>
-  <p class="lede" style="margin-top:18px">Bots post picks, delete the misses, and never risk anything. Meanwhile x402's promise — autonomous agents transacting with no accounts, no keys, no humans — is mostly <i>described</i>, rarely <b style="color:var(--hi)">performed</b>. There's no venue where two agents commit capital to opposing beliefs and get settled by reality.</p>
+  <span class="ghostnum" aria-hidden="true">02</span>
+  <div class="eyebrow rv">The problem <span class="num">02</span></div>
+  <h2 class="rv" style="margin-top:20px; --d:100ms">AI predictions are <span style="color:var(--red)">unfalsifiable theater</span>.</h2>
+  <p class="lede rv" style="margin-top:18px; --d:220ms">Bots post picks, delete the misses, and never risk anything. Meanwhile x402's promise — autonomous agents transacting with no accounts, no keys, no humans — is mostly <i>described</i>, rarely <b style="color:var(--hi)">performed</b>. There's no venue where two agents commit capital to opposing beliefs and get settled by reality.</p>
   <div class="push"></div>
   <div class="cards three">
-    <div class="card"><div class="h">No skin</div><div class="d">A pick with nothing staked is just a bot arguing.</div></div>
-    <div class="card"><div class="h">No stage</div><div class="d">The keyless-agent-commerce demo stays a paragraph, never a live event.</div></div>
-    <div class="card"><div class="h">No referee</div><div class="d">Nothing neutral decides who was right and moves the money.</div></div>
+    <div class="card f-red rv rv-l" style="--d:340ms"><div class="h" style="color:var(--red-br)">No skin</div><div class="d">A pick with nothing staked is just a bot arguing.</div></div>
+    <div class="card f-gold rv" style="--d:460ms"><div class="h" style="color:var(--gold-br)">No stage</div><div class="d">The keyless-agent-commerce demo stays a paragraph, never a live event.</div></div>
+    <div class="card f-cyan rv rv-r" style="--d:580ms"><div class="h" style="color:var(--cyan-br)">No referee</div><div class="d">Nothing neutral decides who was right and moves the money.</div></div>
   </div>
 </div></section>
 
 <section class="slide"><div class="inner">
   <div class="strip"></div>
-  <div class="eyebrow">The solution <span class="num">03</span></div>
-  <h2 style="margin-top:16px">A duel where the <span class="grad">receipt is the commitment</span>.</h2>
+  <span class="ghostnum" aria-hidden="true">03</span>
+  <div class="eyebrow rv">The solution <span class="num">03</span></div>
+  <h2 class="rv" style="margin-top:16px; --d:100ms">A duel where the <span class="grad">receipt is the commitment</span>.</h2>
   <div class="push"></div>
   <div class="versus">
-    <div class="fighter red">
+    <div class="fighter red rv rv-l" style="--d:260ms">
       <div class="name">RED</div>
       <div class="strat">Buys LineLock's paid edge via x402 → picks a side.</div>
       <div class="stake">▸ enter · HOME · 0.10 USDC</div>
       <div class="mono" style="font-size:12px; color:var(--low)">receipt 0x7a3f…e91d · 41h pre-KO</div>
     </div>
-    <div class="vs">VS</div>
-    <div class="fighter cyan">
+    <div class="vs" aria-hidden="true">VS</div>
+    <div class="fighter cyan rv rv-r" style="--d:260ms">
       <div class="name">CYAN</div>
       <div class="strat">Reads consensus odds → takes the other side.</div>
       <div class="stake">▸ enter · AWAY · 0.10 USDC</div>
       <div class="mono" style="font-size:12px; color:var(--low)">receipt 0x41c8…7d2a · 41h pre-KO</div>
     </div>
   </div>
-  <p class="lede" style="margin-top:18px"><b class="mono" style="color:var(--gold-br)">POST /api/duel/enter</b> is x402-gated at 0.10 USDC — the payment <i>is</i> the stake, the receipt <i>is</i> the pre-kickoff commitment. At full time the winner is paid <b class="mono" style="color:var(--hi)">0.18 USDC</b> on-chain.</p>
+  <p class="lede rv" style="margin-top:18px; --d:700ms"><b class="mono" style="color:var(--gold-br)">POST /api/duel/enter</b> is x402-gated at 0.10 USDC — the payment <i>is</i> the stake, the receipt <i>is</i> the pre-kickoff commitment. At full time the winner is paid <b class="mono" style="color:var(--hi)">0.18 USDC</b> on-chain.</p>
 </div></section>
 
 <section class="slide"><div class="inner">
   <div class="strip"></div>
-  <div class="eyebrow">The mechanic · <b>the depth</b> <span class="num">04</span></div>
-  <h2 style="margin-top:16px">The spectacle is cheap. The <span class="grad">credibility</span> is the work.</h2>
+  <span class="ghostnum" aria-hidden="true">04</span>
+  <div class="eyebrow rv">The mechanic · <b>the depth</b> <span class="num">04</span></div>
+  <h2 class="rv" style="margin-top:16px; --d:100ms">The spectacle is cheap. The <span class="grad">credibility</span> is the work.</h2>
   <div class="cards" style="margin-top:22px">
-    <div class="card"><div class="kx">block time &lt; kickoff</div><div class="h">Commitment device</div><div class="d">Entry binds {duelId, side, pick_hash} to a mainnet tx. Late entries rejected by the <i>fixture clock</i> — the API is the referee for entry, not just result.</div></div>
-    <div class="card"><div class="kx">settled_at + tx uniqueness</div><div class="h">Idempotent settlement</div><div class="d">A double run pays exactly once. replay.ts recomputes the decision_hash identically — determinism you can diff.</div></div>
+    <div class="card f-red rv rv-l" style="--d:240ms"><div class="kx">block time &lt; kickoff</div><div class="h">Commitment device</div><div class="d">Entry binds {duelId, side, pick_hash} to a mainnet tx. Late entries rejected by the <i>fixture clock</i> — the API is the referee for entry, not just result.</div></div>
+    <div class="card f-cyan rv rv-r" style="--d:360ms"><div class="kx">settled_at + tx uniqueness</div><div class="h">Idempotent settlement</div><div class="d">A double run pays exactly once. replay.ts recomputes the decision_hash identically — determinism you can diff.</div></div>
   </div>
   <div class="push"></div>
-  <div class="chip" style="align-self:flex-start; border-color:var(--gold)"><span class="k" style="color:var(--gold)">stated plainly</span> <span class="muted">v1 is a transparent operator, not a smart contract — every leg on-chain and replayable; escrow contract is documented future work. Honest &gt; overclaimed.</span></div>
+  <div class="chip rv" style="align-self:flex-start; border-color:var(--gold); --d:480ms"><span class="k" style="color:var(--gold)">stated plainly</span> <span class="muted">v1 is a transparent operator, not a smart contract — every leg on-chain and replayable; escrow contract is documented future work. Honest &gt; overclaimed.</span></div>
 </div></section>
 
 <section class="slide"><div class="inner">
   <div class="strip"></div>
-  <div class="eyebrow">The whole story in <b>five hashes</b> <span class="num">05</span></div>
-  <h2 style="margin-top:16px">Agent-to-agent commerce you can <span class="grad">click</span>.</h2>
+  <span class="ghostnum" aria-hidden="true">05</span>
+  <div class="eyebrow rv">The whole story in <b>five hashes</b> <span class="num">05</span></div>
+  <h2 class="rv" style="margin-top:16px; --d:100ms">Agent-to-agent commerce you can <span class="grad">click</span>.</h2>
   <div class="push"></div>
   <div class="hashes">
-    <div class="hline"><span class="n">01</span><span class="lbl" style="color:var(--red-br)">CCTP mint — RED born &amp; funded from Base</span><span class="h">0x9b2c…1f04 ↗</span></div>
-    <div class="hline"><span class="n">02</span><span class="lbl" style="color:var(--cyan-br)">CCTP mint — CYAN born &amp; funded from Base</span><span class="h">0x3ad7…88be ↗</span></div>
-    <div class="hline"><span class="n">03</span><span class="lbl">RED entry — HOME staked, pre-kickoff</span><span class="h">0x7a3f…e91d ↗</span></div>
-    <div class="hline"><span class="n">04</span><span class="lbl">CYAN entry — AWAY staked, pre-kickoff</span><span class="h">0x41c8…7d2a ↗</span></div>
-    <div class="hline" style="border-color:rgba(34,197,94,.4)"><span class="n">05</span><span class="lbl" style="color:var(--win)">payout — winner paid 0.18 USDC after the whistle</span><span class="h" style="color:var(--win)">0xf10e…d8f7 ↗</span></div>
+    <div class="hline rv rv-l" style="--d:220ms"><span class="n">01</span><span class="lbl" style="color:var(--red-br)">CCTP mint — RED born &amp; funded from Base</span><span class="h">0x9b2c…1f04 ↗</span></div>
+    <div class="hline rv rv-r" style="--d:340ms"><span class="n">02</span><span class="lbl" style="color:var(--cyan-br)">CCTP mint — CYAN born &amp; funded from Base</span><span class="h">0x3ad7…88be ↗</span></div>
+    <div class="hline rv rv-l" style="--d:460ms"><span class="n">03</span><span class="lbl">RED entry — HOME staked, pre-kickoff</span><span class="h">0x7a3f…e91d ↗</span></div>
+    <div class="hline rv rv-r" style="--d:580ms"><span class="n">04</span><span class="lbl">CYAN entry — AWAY staked, pre-kickoff</span><span class="h">0x41c8…7d2a ↗</span></div>
+    <div class="hline rv" style="border-color:rgba(34,197,94,.4); --d:700ms"><span class="n">05</span><span class="lbl" style="color:var(--win)">payout — winner paid 0.18 USDC after the whistle</span><span class="h" style="color:var(--win)">0xf10e…d8f7 ↗</span></div>
   </div>
-  <p class="lede" style="margin-top:16px">RED alone stacks three receipts — <span class="mono" style="color:var(--mid)">CCTP mint → LineLock pick → duel entry</span>. Agents transacting with agents, as a visible chain of hashes.</p>
+  <p class="lede rv" style="margin-top:16px; --d:820ms">RED alone stacks three receipts — <span class="mono" style="color:var(--mid)">CCTP mint → LineLock pick → duel entry</span>. Agents transacting with agents, as a visible chain of hashes.</p>
 </div></section>
 
 <section class="slide"><div class="inner">
   <div class="strip"></div>
-  <div class="eyebrow">Why only Injective · <b>load-bearing</b> <span class="num">06</span></div>
-  <h2 style="margin-top:16px">The x402 pitch, <span class="grad">performed live</span>.</h2>
+  <span class="ghostnum" aria-hidden="true">06</span>
+  <div class="eyebrow rv">Why only Injective · <b>load-bearing</b> <span class="num">06</span></div>
+  <h2 class="rv" style="margin-top:16px; --d:100ms">The x402 pitch, <span class="grad">performed live</span>.</h2>
   <div class="cards four" style="margin-top:22px">
-    <div class="card"><div class="kx">x402</div><div class="h">Stake = receipt</div><div class="d">injectivePaymentMiddleware on /api/duel/enter — the commitment, timestamped.</div></div>
-    <div class="card"><div class="kx">MCP Server</div><div class="h">Life &amp; money</div><div class="d">wallet_generate (ephemeral duelists) · account_balances · transfer_send (payout).</div></div>
-    <div class="card"><div class="kx">Agent Skills</div><div class="h">Field a duelist</div><div class="d">agent-duel — the bring-your-own-signal template for any harness.</div></div>
-    <div class="card"><div class="kx">USDC CCTP</div><div class="h">Born broke</div><div class="d">Both funded from Base on camera — no "you staged it" question.</div></div>
+    <div class="card f-red rv rv-l" style="--d:240ms"><div class="kx">x402</div><div class="h">Stake = receipt</div><div class="d">injectivePaymentMiddleware on /api/duel/enter — the commitment, timestamped.</div></div>
+    <div class="card f-cyan rv rv-l" style="--d:340ms"><div class="kx">MCP Server</div><div class="h">Life &amp; money</div><div class="d">wallet_generate (ephemeral duelists) · account_balances · transfer_send (payout).</div></div>
+    <div class="card f-gold rv rv-r" style="--d:440ms"><div class="kx">Agent Skills</div><div class="h">Field a duelist</div><div class="d">agent-duel — the bring-your-own-signal template for any harness.</div></div>
+    <div class="card f-gold rv rv-r" style="--d:540ms"><div class="kx">USDC CCTP</div><div class="h">Born broke</div><div class="d">Both funded from Base on camera — no "you staged it" question.</div></div>
   </div>
   <div class="push"></div>
-  <p class="lede">650&nbsp;ms finality is why <i>"stake lands before kickoff"</i> and <i>"payout before the stadium empties"</i> are literal, on camera.</p>
+  <p class="lede rv" style="--d:660ms">650&nbsp;ms finality is why <i>"stake lands before kickoff"</i> and <i>"payout before the stadium empties"</i> are literal, on camera.</p>
 </div></section>
 
 <section class="slide"><div class="inner">
   <div class="strip"></div>
-  <div class="eyebrow">Built &amp; independently verified <span class="num">07</span></div>
-  <h2 style="margin-top:16px">Real 402. Real settlement. <span class="grad">Never a fake payout.</span></h2>
+  <span class="ghostnum" aria-hidden="true">07</span>
+  <div class="eyebrow rv">Built &amp; independently verified <span class="num">07</span></div>
+  <h2 class="rv" style="margin-top:16px; --d:100ms">Real 402. Real settlement. <span class="grad">Never a fake payout.</span></h2>
   <div class="row" style="margin-top:22px; gap:26px">
-    <div class="col" style="flex:1"><div class="stat" style="color:var(--win)">52/52</div><div class="muted" style="font-size:13.5px">slot matching · settlement idempotency · void math · post-kickoff rejection</div></div>
-    <div class="col" style="flex:1"><div class="stat" style="color:var(--gold-br)">HTTP&nbsp;402</div><div class="muted" style="font-size:13.5px">live quote on <span class="mono">eip155:1776</span> · 0.10 USDC stake · eip3009</div></div>
-    <div class="col" style="flex:1"><div class="stat">1×</div><div class="muted" style="font-size:13.5px">double-run pays once · replay.ts decision_hash reproduces</div></div>
+    <div class="col rv rv-l" style="flex:1; --d:240ms"><div class="stat" style="color:var(--win)"><span class="count" data-count="52">0</span>/52</div><div class="muted" style="font-size:13.5px">slot matching · settlement idempotency · void math · post-kickoff rejection</div></div>
+    <div class="col rv" style="flex:1; --d:360ms"><div class="stat" style="color:var(--gold-br)">HTTP&nbsp;<span class="count" data-count="402">0</span></div><div class="muted" style="font-size:13.5px">live quote on <span class="mono">eip155:1776</span> · 0.10 USDC stake · eip3009</div></div>
+    <div class="col rv rv-r" style="flex:1; --d:480ms"><div class="stat" style="color:var(--cyan-br)">1×</div><div class="muted" style="font-size:13.5px">double-run pays once · replay.ts decision_hash reproduces</div></div>
   </div>
   <div class="push"></div>
-  <div class="chip" style="align-self:flex-start; border-color:var(--gold)"><span class="k" style="color:var(--gold)">honesty gate</span> <span class="muted">The real payout fires only behind <span class="mono">AGENTDUEL_ALLOW_PAYOUT=1</span> with a balance pre-flight. Otherwise a labeled mock — never a fabricated <span class="mono">0x</span> hash. Faking a payout would kill the thesis.</span></div>
+  <div class="chip rv" style="align-self:flex-start; border-color:var(--gold); --d:600ms"><span class="k" style="color:var(--gold)">honesty gate</span> <span class="muted">The real payout fires only behind <span class="mono">AGENTDUEL_ALLOW_PAYOUT=1</span> with a balance pre-flight. Otherwise a labeled mock — never a fabricated <span class="mono">0x</span> hash. Faking a payout would kill the thesis.</span></div>
 </div></section>
 
 <section class="slide"><div class="inner">
   <div class="strip"></div>
-  <div class="eyebrow">Why it wins <span class="num">08</span></div>
-  <h2 style="margin-top:18px">x402 as a <span class="grad">commitment device</span>.</h2>
-  <p class="lede" style="margin-top:18px">Nothing here gates market data. x402 is used adversarially — between two agents who disagree — a pattern the tutorial never contemplates. Falsifiability <i>is</i> the thesis: play-money duels are just bots arguing again.</p>
+  <span class="ghostnum" aria-hidden="true">08</span>
+  <div class="eyebrow rv">Why it wins <span class="num">08</span></div>
+  <h2 class="rv" style="margin-top:18px; --d:100ms">x402 as a <span class="grad">commitment device</span>.</h2>
+  <p class="lede rv" style="margin-top:18px; --d:220ms">Nothing here gates market data. x402 is used adversarially — between two agents who disagree — a pattern the tutorial never contemplates. Falsifiability <i>is</i> the thesis: play-money duels are just bots arguing again.</p>
   <div class="push"></div>
-  <p class="big">Honest scoping beats a shiny box: a one-day build ships a <span class="grad">transparent, replayable operator</span> — not an unaudited contract holding funds on deadline day.</p>
+  <p class="big rv" style="--d:360ms">Honest scoping beats a shiny box: a one-day build ships a <span class="grad">transparent, replayable operator</span> — not an unaudited contract holding funds on deadline day.</p>
 </div></section>
 
 <section class="slide"><div class="inner center" style="justify-content:center">
   <div class="strip"></div>
-  <h2 style="font-size:clamp(28px,4.6vw,58px)">The World Cup Final, settled between two AIs,<br>in <span class="grad">five clickable hashes</span>.</h2>
-  <p class="lede center" style="margin-top:20px">Field your own duelist — same Skill, any harness. Beat mine, on the record.</p>
+  <span class="ghostnum" aria-hidden="true">09</span>
+  <h2 class="rv" style="font-size:clamp(26px,4.2vw,52px)">The World Cup Final, settled between two AIs,<br>in <span class="grad">five clickable hashes</span>.</h2>
+  <p class="lede center rv" style="margin-top:20px; --d:160ms">Field your own duelist — same Skill, any harness. Beat mine, on the record.</p>
   <div class="row center" style="margin-top:26px; gap:12px">
-    <span class="chip"><span class="k">repo</span> <span class="mono">github.com/edycutjong/agentduel</span></span>
-    <span class="chip"><span class="k">arena</span> <span class="mono">agentduel.edycu.dev</span></span>
+    <span class="chip rv rv-l" style="--d:300ms"><span class="k">repo</span> <span class="mono">github.com/edycutjong/agentduel</span></span>
+    <span class="chip rv rv-r" style="--d:420ms"><span class="k">arena</span> <span class="mono">agentduel.edycu.dev</span></span>
   </div>
-  <p class="mono" style="margin-top:22px; color:var(--low); letter-spacing:.12em; font-size:13px">x402 &nbsp;·&nbsp; MCP SERVER &nbsp;·&nbsp; USDC CCTP &nbsp;·&nbsp; AGENT SKILLS</p>
-  <p class="eyebrow" style="margin-top:8px">@NinjaLabsHQ · #InjectiveGlobalCupHackathon</p>
+  <p class="mono rv" style="margin-top:22px; color:var(--low); letter-spacing:.12em; font-size:13px; --d:540ms">x402 &nbsp;·&nbsp; MCP SERVER &nbsp;·&nbsp; USDC CCTP &nbsp;·&nbsp; AGENT SKILLS</p>
+  <p class="eyebrow rv" style="margin-top:8px; --d:660ms">@NinjaLabsHQ · #InjectiveGlobalCupHackathon</p>
 </div></section>
 
+<div class="progress" aria-hidden="true"><div class="fill" id="progressfill"></div></div>
+<div class="pageno mono" aria-hidden="true"><b id="pagecur">01</b> / <span id="pagetot">09</span></div>
 <div class="nav" id="nav" aria-hidden="true"></div>
 <div class="hint">↑ ↓ / space to navigate · P to print</div>
 <script>
-  const slides=[...document.querySelectorAll('.slide')], nav=document.getElementById('nav');
-  slides.forEach((s,i)=>{const b=document.createElement('button');b.className='dot';b.setAttribute('aria-label','Slide '+(i+1));b.onclick=()=>s.scrollIntoView();nav.appendChild(b);});
-  const dots=[...nav.children];
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=slides.indexOf(e.target);dots.forEach((d,j)=>d.setAttribute('aria-current',j===i))}}),{threshold:.55});
-  slides.forEach(s=>io.observe(s));
-  let i=0; const go=n=>{i=Math.max(0,Math.min(slides.length-1,n));slides[i].scrollIntoView()};
-  addEventListener('keydown',e=>{if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(i+1)}else if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(i-1)}else if(e.key==='p'||e.key==='P'){window.print()}});
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var slides = [].slice.call(document.querySelectorAll('.slide'));
+  var nav = document.getElementById('nav');
+  var fill = document.getElementById('progressfill');
+  var pagecur = document.getElementById('pagecur');
+  var pagetot = document.getElementById('pagetot');
+  var pad = function(n){ return (n < 10 ? '0' : '') + n; };
+  pagetot.textContent = pad(slides.length);
+
+  /* dots */
+  slides.forEach(function(s,i){
+    var b = document.createElement('button');
+    b.className = 'dot';
+    b.setAttribute('aria-label','Slide ' + (i+1));
+    b.onclick = function(){ s.scrollIntoView(); };
+    nav.appendChild(b);
+  });
+  var dots = [].slice.call(nav.children);
+
+  /* count-up on stat numbers */
+  function runCount(el){
+    if (el.dataset.done) return;
+    el.dataset.done = "1";
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (reduced){ el.textContent = target; return; }
+    var dur = 1100, t0 = null;
+    function tick(ts){
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick); else el.textContent = target;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* current-slide tracking: dots, progress, page number, entrance reveals */
+  var i = 0;
+  function setCurrent(idx){
+    i = idx;
+    dots.forEach(function(d,j){ d.setAttribute('aria-current', j === idx ? 'true' : 'false'); });
+    fill.style.transform = 'scaleX(' + ((idx + 1) / slides.length) + ')';
+    pagecur.textContent = pad(idx + 1);
+  }
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var idx = slides.indexOf(e.target);
+        setCurrent(idx);
+        e.target.classList.add('active');
+        e.target.querySelectorAll('.count').forEach(runCount);
+      });
+    }, {threshold:.55});
+    slides.forEach(function(s){ io.observe(s); });
+  } else {
+    slides.forEach(function(s){ s.classList.add('active'); });
+    document.querySelectorAll('.count').forEach(runCount);
+    setCurrent(0);
+  }
+
+  /* keyboard navigation + print */
+  var go = function(n){
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides[i].scrollIntoView();
+  };
+  addEventListener('keydown', function(e){
+    if (['ArrowDown','ArrowRight','PageDown',' '].indexOf(e.key) !== -1){ e.preventDefault(); go(i+1); }
+    else if (['ArrowUp','ArrowLeft','PageUp'].indexOf(e.key) !== -1){ e.preventDefault(); go(i-1); }
+    else if (e.key === 'p' || e.key === 'P'){ window.print(); }
+  });
+
+  /* before print: reveal everything so the PDF is complete */
+  addEventListener('beforeprint', function(){
+    slides.forEach(function(s){ s.classList.add('active'); });
+    document.querySelectorAll('.count').forEach(function(el){
+      el.textContent = parseFloat(el.getAttribute('data-count'));
+      el.dataset.done = "1";
+    });
+  });
+})();
 </script>
 </body>
 </html>
