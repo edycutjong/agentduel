@@ -227,7 +227,7 @@ make security-scan  # npm audit + license check
 **The hard part is witnessable in under 5 minutes, with zero funds** — you never need
 a wallet to falsify the thesis:
 
-1. **Reproduce path (< 5 min):** `git clone …` → `npm install` → `npm test` (52 green)
+1. **Reproduce path (< 5 min):** `git clone …` → `npm install` → `npm test` (53 green)
    → `npm run api` → the curl below. No API keys required for any of it (a
    football-data key only enriches live fixtures; a committed snapshot is the fallback).
 2. **The x402 gate is real, unfunded:** `curl -i -X POST http://localhost:8403/api/duel/enter`

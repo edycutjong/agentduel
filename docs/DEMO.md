@@ -121,7 +121,7 @@ the Final (Jul 19) if the wallet is funded, never faked if it isn't.
 
 ## Before submit — user steps (clearly-labeled TODO, not yet done)
 - [x] **Record** the 3-min video — DONE: **https://youtu.be/Q7hxQKvnxyY** (2:03 zero-funds cut; README badge live).
-- [ ] **Deploy** the arena page (`web/`) → replaces the gray `Live Demo` badge (no live URL is claimed until then).
+- [x] **Deploy** the arena page (`web/`) — DONE: LIVE at **https://agentduel.edycu.dev**.
 - [ ] **(Optional, highest wow)** Fund the arena wallet (~0.3 INJ gas + USDC via CCTP), set `AGENTDUEL_ALLOW_PAYOUT=1`, and run **one real duel** (2 entries + 1 payout) on a Semi-Final or the Final for a real `0x` payout hash.
 
 ## Cross-harness beat (optional, 0 code)

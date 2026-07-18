@@ -3,7 +3,7 @@
 Snapshot of what's real, what runs now with zero funds, and what's gated. The
 honesty rule governs this file: money-moving items are **gated, not faked**.
 
-_Built 2026-07-12 · `@injectivelabs/x402@0.0.1` · 52 tests green._
+_Built 2026-07-12 · `@injectivelabs/x402@0.0.1` · 53 tests green._
 
 ---
 
@@ -34,7 +34,7 @@ _Built 2026-07-12 · `@injectivelabs/x402@0.0.1` · 52 tests green._
   rehearsal** (real QF FRA 2-0 MAR) settled through the real worker with the
   labeled mock — so the page never demos empty and nothing is faked.
 
-**Tests: 52 passing** (8 files) — `hash` (7) · `slot-matching` (10) ·
+**Tests: 53 passing** (8 files) — `hash` (7) · `slot-matching` (10) ·
 `settlement` (11) · `idempotency` (6) · `pay-gate` (6) · `football` (4) ·
 `quote` (4) · `proof` (4).
 
@@ -44,7 +44,7 @@ _Built 2026-07-12 · `@injectivelabs/x402@0.0.1` · 52 tests green._
 
 | Command | What it proves |
 |---|---|
-| `npm test` | 52 tests incl. "double-run pays once" + void math + 402 parse |
+| `npm test` | 53 tests incl. "double-run pays once" + void math + 402 parse |
 | `npm run api` + `curl -i -X POST …/api/duel/enter` | live **402 + quote** (eip155:1776, 100000 units, arena payTo, native USDC) |
 | `npm run red` / `npm run cyan` | duelists analyze + parse the live 402 (dry-run) |
 | `npm run replay -- --render` | rehearsal reproduces: recomputed `decision_hash` == stored → ASCII timeline |
