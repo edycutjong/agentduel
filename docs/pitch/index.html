@@ -260,7 +260,7 @@ html.js .slide.active .vs{opacity:1; animation:vsPunch .65s var(--punch) .55s bo
     </div>
   </div>
   <p class="lede rv" style="margin-top:18px; --d:700ms"><b class="mono" style="color:var(--gold-br)">POST /api/duel/enter</b> is x402-gated at 0.10 USDC — the payment <i>is</i> the stake, the receipt <i>is</i> the pre-kickoff commitment. At full time the winner is paid <b class="mono" style="color:var(--hi)">0.18 USDC</b> on-chain.</p>
-  <p class="rv mono" style="margin-top:12px; --d:760ms; font-size:12px; color:var(--low)">Hashes illustrative — real payouts are funds-gated; mocks are labeled mock-tx-…</p>
+  <p class="rv mono" style="margin-top:12px; --d:760ms; font-size:12px; color:var(--low)">Hashes printed here illustrative — but as of 2026-07-18 REAL stake hashes exist for the Final duel (duel-final-2026): RED 0xc106c9…a383 · CYAN 0x7e595b…6073. Real payouts stay funds-gated; mocks are labeled mock-tx-…</p>
 </div></section>
 
 <section class="slide"><div class="inner">
@@ -289,7 +289,7 @@ html.js .slide.active .vs{opacity:1; animation:vsPunch .65s var(--punch) .55s bo
     <div class="hline rv rv-r" style="--d:580ms"><span class="n">04</span><span class="lbl">CYAN entry — AWAY staked, pre-kickoff</span><span class="h">0x41c8…7d2a ↗</span></div>
     <div class="hline rv" style="border-color:rgba(34,197,94,.4); --d:700ms"><span class="n">05</span><span class="lbl" style="color:var(--win)">payout — winner paid 0.18 USDC after the whistle</span><span class="h" style="color:var(--win)">0xf10e…d8f7 ↗</span></div>
   </div>
-  <p class="rv mono" style="margin-top:12px; --d:760ms; font-size:12px; color:var(--low)">Hashes illustrative — real payouts are funds-gated; mocks are labeled mock-tx-…</p>
+  <p class="rv mono" style="margin-top:12px; --d:760ms; font-size:12px; color:var(--low)">Hashes printed here illustrative — but as of 2026-07-18 REAL stake hashes exist for the Final duel (duel-final-2026): RED 0xc106c9…a383 · CYAN 0x7e595b…6073. Real payouts stay funds-gated; mocks are labeled mock-tx-…</p>
   <p class="lede rv" style="margin-top:16px; --d:820ms">RED alone stacks three receipts — <span class="mono" style="color:var(--mid)">CCTP mint → LineLock pick → duel entry</span>. Agents transacting with agents, as a visible chain of hashes.</p>
 </div></section>
 
@@ -319,7 +319,7 @@ html.js .slide.active .vs{opacity:1; animation:vsPunch .65s var(--punch) .55s bo
     <div class="col rv rv-r" style="flex:1; --d:480ms"><div class="stat" style="color:var(--cyan-br)">1×</div><div class="muted" style="font-size:13.5px">double-run pays once · replay.ts decision_hash reproduces</div></div>
   </div>
   <div class="push"></div>
-  <div class="chip rv" style="align-self:flex-start; border-color:var(--gold); --d:600ms"><span class="k" style="color:var(--gold)">honesty gate</span> <span class="muted">The real payout fires only behind <span class="mono">AGENTDUEL_ALLOW_PAYOUT=1</span> with a balance pre-flight. Otherwise a labeled mock — never a fabricated <span class="mono">0x</span> hash. Faking a payout would kill the thesis.</span></div>
+  <div class="chip rv" style="align-self:flex-start; border-color:var(--gold); --d:600ms"><span class="k" style="color:var(--gold)">honesty gate</span> <span class="muted">The real payout fires only behind <span class="mono">AGENTDUEL_ALLOW_PAYOUT=1</span> with a balance pre-flight. Otherwise a labeled mock — never a fabricated <span class="mono">0x</span> hash. Faking a payout would kill the thesis. Status: wallet funded, <span class="mono">duel-final-2026</span> locked live with two real stakes — the payout stays gated until the final whistle.</span></div>
 </div></section>
 
 <section class="slide"><div class="inner">

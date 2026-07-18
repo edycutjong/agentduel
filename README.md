@@ -29,7 +29,7 @@
   <b>AI prediction bots post picks and quietly delete their misses.</b> AgentDuel makes a pick <i>falsifiable</i>: two AI agents take <b>opposing</b> sides of a live World Cup match and each stakes <b>0.10 USDC</b> over <b>Injective&nbsp;x402</b> — the entry receipt <i>is</i> the pre-kickoff commitment. Reality settles it: the winner is paid <b>0.18 USDC on-chain</b> after the final whistle (0.02 stated arena fee; a draw refunds 0.09 each). <b>Picks that can't be faked, because money actually moves.</b>
 </p>
 
-> **About the banner** — it's an *illustrative* arena poster: the Final is unplayed and the `0x…` hashes shown in it are decorative. Nothing in this repo fakes a receipt — real money is funds-gated and mock settlements are labeled `mock-tx-…` (never a `0x` hash). The gray badge is an honest placeholder: the live arena URL goes live on deploy (see **[STATUS.md](docs/STATUS.md)**). The **[demo video](https://youtu.be/Q7hxQKvnxyY)** is live — every beat in it runs zero-funds, with mocks labeled on camera.
+> **About the banner** — it's an *illustrative* arena poster: the Final is unplayed and the `0x…` hashes shown in it are decorative. Nothing in this repo fakes a receipt — real money is funds-gated and mock settlements are labeled `mock-tx-…` (never a `0x` hash). **As of 2026-07-18 the real Final duel is live with real receipts** — `curl https://api.agentduel.edycu.dev/api/duel/duel-final-2026/proof` and check the stake hashes yourself. The gray badge is an honest placeholder: the live arena URL goes live on deploy (see **[STATUS.md](docs/STATUS.md)**). The **[demo video](https://youtu.be/Q7hxQKvnxyY)** is live — every beat in it runs zero-funds, with mocks labeled on camera.
 
 A minimal duel arena that performs the x402 promise — autonomous agents committing capital with no accounts, no humans — as sport. **The ONE flow with depth: enter → commit → settle → payout, twice per duel.**
 
@@ -50,11 +50,27 @@ A minimal duel arena that performs the x402 promise — autonomous agents commit
 
 The thesis is falsifiability, so **nothing is faked**:
 
-- The **real payout is funds-gated.** All settlement logic (winner selection,
-  idempotency, void/refund math) is built + unit-tested against a **mock**
-  `payWinner`; a real on-chain USDC transfer runs **only** behind
-  `AGENTDUEL_ALLOW_PAYOUT=1` on a funded wallet. Mock payouts return an
-  unmistakable `mock-tx-…` id tagged `is_mock:true` — never a `0x` hash.
+- **The real duel is live (2026-07-18).** `duel-final-2026` — the actual FIFA
+  World Cup 2026 **Final** (match `537390`, kickoff `2026-07-19T19:00Z`) — is
+  **locked with two REAL pre-kickoff staked commitments**, each a real 0.10 USDC
+  x402 payment through the live 402 gate on Injective EVM mainnet (`eip155:1776`):
+  - 🔴 RED · HOME · [`0xc106c929dc00d902d1b690648e422cab81678cfb36fc06ce3a643c709eeba383`](https://blockscout.injective.network/tx/0xc106c929dc00d902d1b690648e422cab81678cfb36fc06ce3a643c709eeba383)
+  - 🔵 CYAN · AWAY · [`0x7e595b277b771ec98b1280af862e5699b30d31534f9013f5eaa9cbd512206073`](https://blockscout.injective.network/tx/0x7e595b277b771ec98b1280af862e5699b30d31534f9013f5eaa9cbd512206073)
+
+  Verify with one curl — both entries `is_placeholder:false`,
+  `pick_hash_verifies:true`, `pre_kickoff_valid:true`:
+  ```bash
+  curl https://api.agentduel.edycu.dev/api/duel/duel-final-2026/proof
+  ```
+- The **real payout is funds-gated — until the whistle.** All settlement logic
+  (winner selection, idempotency, void/refund math) is built + unit-tested
+  against a **mock** `payWinner`; a real on-chain USDC transfer runs **only**
+  behind `AGENTDUEL_ALLOW_PAYOUT=1` on a funded wallet. Mock payouts return an
+  unmistakable `mock-tx-…` id tagged `is_mock:true` — never a `0x` hash. For
+  `duel-final-2026` the arena wallet **is funded** and the real payout is
+  **scheduled** to run through that same gate after the final whistle
+  (~Jul 19 evening) — it has **not** happened yet, and this README won't claim
+  it has until the hash exists.
 - **Rehearsal/seed entries** use labeled all-zero receipts (`is_placeholder:true`)
   and are never presented as on-chain receipts.
 - The **402 handshake needs no funds** and is proven live (below).

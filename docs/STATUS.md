@@ -7,6 +7,40 @@ _Built 2026-07-12 · `@injectivelabs/x402@0.0.1` · 53 tests green._
 
 ---
 
+## 🔴🔵 2026-07-18 — REAL duel LIVE on the actual Final (real on-chain stakes)
+
+`duel-final-2026` — the real FIFA World Cup 2026 **Final** (match `537390`,
+kickoff `2026-07-19T19:00Z`) — is **LOCKED on the live arena with two REAL
+0.10 USDC x402 stakes**, both paid through the live 402 gate on Injective EVM
+mainnet (`eip155:1776`):
+
+- **RED · HOME** — entry receipt
+  [`0xc106c929dc00d902d1b690648e422cab81678cfb36fc06ce3a643c709eeba383`](https://blockscout.injective.network/tx/0xc106c929dc00d902d1b690648e422cab81678cfb36fc06ce3a643c709eeba383).
+  RED first **bought its edge from LineLock's live API** with another real x402
+  payment:
+  [`0x8848e7798a4ff28f1c817a74f052b75f3462b33bcd4cba9400cc86b18143045e`](https://blockscout.injective.network/tx/0x8848e7798a4ff28f1c817a74f052b75f3462b33bcd4cba9400cc86b18143045e).
+- **CYAN · AWAY** — entry receipt
+  [`0x7e595b277b771ec98b1280af862e5699b30d31534f9013f5eaa9cbd512206073`](https://blockscout.injective.network/tx/0x7e595b277b771ec98b1280af862e5699b30d31534f9013f5eaa9cbd512206073)
+  (contrarian, free consensus odds).
+- **CCTP funding executed for real** — Base burn
+  [`0x66ce1116e75f780e60259e394304e86f7565b52276f9d49e4c7fc66209427b37`](https://basescan.org/tx/0x66ce1116e75f780e60259e394304e86f7565b52276f9d49e4c7fc66209427b37)
+  → Injective mint
+  [`0xd757a98d6abb3e760898fc8c30447f6a8b86d35c0745db4f474ea56d3c4464ac`](https://blockscout.injective.network/tx/0xd757a98d6abb3e760898fc8c30447f6a8b86d35c0745db4f474ea56d3c4464ac).
+
+One-curl proof (both entries `is_placeholder:false`, `pick_hash_verifies:true`,
+`pre_kickoff_valid:true`):
+
+```bash
+curl https://api.agentduel.edycu.dev/api/duel/duel-final-2026/proof
+```
+
+**Settlement + real payout are still PENDING** — they run after the final
+whistle (~Jul 19 evening) via the same funds-gated settle
+(`AGENTDUEL_ALLOW_PAYOUT=1`, wallet now funded). No payout has happened yet;
+this file will get the payout hash when it exists, not before.
+
+---
+
 ## ✅ Done (built + verified)
 
 - **Arena core** (pure, tested): slot matching with typed errors
@@ -56,7 +90,11 @@ _Built 2026-07-12 · `@injectivelabs/x402@0.0.1` · 53 tests green._
 
 ---
 
-## ⛔ Blocked on funding (gated — real tx, wallet unfunded)
+## ⛔ Blocked on funding (as of 2026-07-12 — superseded 2026-07-18, see top)
+
+> **Superseded 2026-07-18:** CCTP funding executed, real entries paid, real duel
+> live (hashes in the dated section at the top). Only the **payout** remains
+> pending — it runs post-whistle through the same gate. Kept for the record:
 
 Wallet state (2026-07-12): **13 USDC on Base, 0 INJ / 0 Base ETH / 0 USDC on
 Injective**. So these need funding first; the logic is built + tested against the
@@ -76,7 +114,12 @@ To go live: fund the arena wallet → `AGENTDUEL_ALLOW_PAYOUT=1` → run one rea
 
 ---
 
-## 🟡 Blocked on LineLock (sibling not deployed)
+## 🟡 Blocked on LineLock (as of 2026-07-12 — resolved 2026-07-18)
+
+> **Resolved 2026-07-18:** LineLock's API is live and RED made a **real paid
+> x402 call** for its edge —
+> `0x8848e7798a4ff28f1c817a74f052b75f3462b33bcd4cba9400cc86b18143045e`
+> (see the dated section at the top). Kept for the record:
 
 - **RED's live paid edge** — LineLock is built in
   `../../hackquest-injective-linelock/build/` but not deployed. `LINELOCK_URL`
