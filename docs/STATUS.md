@@ -34,10 +34,13 @@ One-curl proof (both entries `is_placeholder:false`, `pick_hash_verifies:true`,
 curl https://api.agentduel.edycu.dev/api/duel/duel-final-2026/proof
 ```
 
-**Settlement + real payout are still PENDING** — they run after the final
-whistle (~Jul 19 evening) via the same funds-gated settle
-(`AGENTDUEL_ALLOW_PAYOUT=1`, wallet now funded). No payout has happened yet;
-this file will get the payout hash when it exists, not before.
+**✅ SETTLED 2026-07-20** — the Final finished HOME 1-0 (extra time) → **RED
+wins**, and the real payout fired through the funds-gated settle
+(`AGENTDUEL_ALLOW_PAYOUT=1` on the funded wallet): **0.18 USDC → RED**, tx
+[`0xfe1b09f6294db560af9edeb0200629ebe4619cf35eb234f50d5a3b442da1c5a5`](https://blockscout.injective.network/tx/0xfe1b09f6294db560af9edeb0200629ebe4619cf35eb234f50d5a3b442da1c5a5)
+(Injective EVM block 174957551, status `0x1`). `/proof` now reports
+`state:settled`, `is_mock:false`, `decision_hash 312170c7…`; `npm run replay`
+recomputes an **IDENTICAL** hash.
 
 ---
 
@@ -92,9 +95,10 @@ this file will get the payout hash when it exists, not before.
 
 ## ⛔ Blocked on funding (as of 2026-07-12 — superseded 2026-07-18, see top)
 
-> **Superseded 2026-07-18:** CCTP funding executed, real entries paid, real duel
-> live (hashes in the dated section at the top). Only the **payout** remains
-> pending — it runs post-whistle through the same gate. Kept for the record:
+> **Superseded 2026-07-18 → CLOSED 2026-07-20:** CCTP funding executed, real
+> entries paid, real duel live, and the **payout settled post-whistle** through
+> the same gate (0.18 USDC → RED, tx `0xfe1b09f6…c5a5` — see the dated section at
+> the top). Kept for the record:
 
 Wallet state (2026-07-12): **13 USDC on Base, 0 INJ / 0 Base ETH / 0 USDC on
 Injective**. So these need funding first; the logic is built + tested against the

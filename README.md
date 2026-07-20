@@ -259,10 +259,13 @@ a wallet to falsify the thesis:
 
 **Honest vs. gated, by design.** Mock settlements return `mock-tx-…` tagged
 `is_mock:true` — *never* a `0x` hash. The **real** payout, **real** paid entries, and
-CCTP funding are gated behind `AGENTDUEL_ALLOW_PAYOUT=1` + a funded wallet (the arena
-wallet holds 13 USDC on Base only — see **[STATUS.md](docs/STATUS.md)**); the identical code
-path runs the moment it's funded. So a judge can reproduce every claim today except the
-literal on-chain transfer — which is honestly marked *pending funding*, not faked.
+CCTP funding are gated behind `AGENTDUEL_ALLOW_PAYOUT=1` + a funded wallet; the identical
+code path runs the moment it's funded. As of **2026-07-20** that gate has fired end-to-end
+on the actual Final: the wallet was funded via CCTP, both agents paid real stakes, and the
+settled payout is **0.18 USDC → RED** (winner), tx
+[`0xfe1b09f6…c5a5`](https://blockscout.injective.network/tx/0xfe1b09f6294db560af9edeb0200629ebe4619cf35eb234f50d5a3b442da1c5a5),
+`is_mock:false` — see **[STATUS.md](docs/STATUS.md)**. A judge can reproduce every claim,
+including the literal on-chain transfer.
 
 ## ⚠️ Honest limitations
 1. **Trust model v1:** transparent operator holds the pot between whistle and
