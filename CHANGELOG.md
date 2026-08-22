@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/edycutjong/agentduel/compare/v1.2.0...v1.2.1) (2026-08-22)
+
+
+### Bug Fixes
+
+* **deps:** resolve 7 dependency vulnerabilities via lockfile ([3de0eb0](https://github.com/edycutjong/agentduel/commit/3de0eb09ebd055feac726b208d4cf1fd6922ca3f))
+
 # [1.2.0](https://github.com/edycutjong/agentduel/compare/v1.1.0...v1.2.0) (2026-07-17)
 
 
